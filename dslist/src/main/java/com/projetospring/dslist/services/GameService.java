@@ -3,6 +3,7 @@ package com.projetospring.dslist.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.projetospring.dslist.dto.GameMinDTO;
 import com.projetospring.dslist.entities.Game;
 import com.projetospring.dslist.repositories.GameRepository;
 
@@ -12,8 +13,8 @@ public class GameService {
     @Autowired
 	private GameRepository gameRepository;
     
-    public List<Game> findAll() {
+    public List<GameMinDTO> findAll() {
 		List<Game> result = gameRepository.findAll();
-		return result;
+        return result.stream().map(x -> new GameMinDTO(x)).toList();
 	}
 }
